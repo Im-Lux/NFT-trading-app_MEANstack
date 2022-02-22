@@ -1,0 +1,130 @@
+<h2 class="title">Wanna join us??? HOP IN</h2>
+
+<form [formGroup]="registerForm" (submit)="registerUser()">
+  <label>Username : </label><br />
+  <input
+    type="text"
+    placeholder="Soooo you are..."
+    formControlName="username"
+  />
+  <div
+    *ngIf="
+      registerForm.controls['username'].invalid &&
+      registerForm.controls['username'].touched
+    "
+  >
+    <span
+      class="error"
+      *ngIf="registerForm.controls['username'].errors?.['required']"
+    >
+      Username is required!</span
+    >
+  </div>
+  <br />
+
+  <label>Email : </label><br />
+  <input
+    type="email"
+    placeholder="Formal mail pls..."
+    formControlName="email"
+  />
+  <div
+    *ngIf="
+      registerForm.controls['email'].invalid &&
+      registerForm.controls['email'].touched
+    "
+  >
+    <span
+      class="error"
+      *ngIf="registerForm.controls['email'].errors?.['required']"
+    >
+      Email is required!</span
+    >
+    <span
+      class="error"
+      *ngIf="registerForm.controls['email'].errors?.['email']"
+    >
+      Email is not in correct form!</span
+    >
+  </div>
+  <br />
+
+  <label>Password : </label><br />
+  <input
+    type="password"
+    placeholder="Shhhhush now"
+    formControlName="password"
+  />
+  <div
+    *ngIf="
+      registerForm.controls['password'].invalid &&
+      registerForm.controls['password'].touched
+    "
+  >
+    <span
+      class="error"
+      *ngIf="registerForm.controls['password'].errors?.['required']"
+    >
+      Password is required!</span
+    >
+  </div>
+  <br />
+
+  <label>Repeat Password : </label><br />
+  <input
+    type="password"
+    placeholder="Confirm your shhh"
+    formControlName="passwordAgain"
+  />
+  <div
+    *ngIf="
+      registerForm.controls['passwordAgain'].invalid &&
+      registerForm.controls['passwordAgain'].touched &&
+      registerForm.controls['password'].value.length > 0
+    "
+  >
+    <span
+      class="error"
+      *ngIf="registerForm.controls['passwordAgain'].errors?.['notEqual']"
+    >
+      Password does not match original password!</span
+    >
+  </div>
+  <br />
+
+  <label>Image URL : </label><br />
+  <input type="text" placeholder="SHOW YOURSELF" formControlName="image" />
+  <div
+    *ngIf="
+      registerForm.controls['image'].invalid &&
+      registerForm.controls['image'].touched
+    "
+  >
+    <span
+      class="error"
+      *ngIf="registerForm.controls['image'].errors?.['required']"
+    >
+      Image is required!</span
+    >
+  </div>
+  <br />
+
+  <span class="error" *ngIf="errorMessage.trim().length > 0">
+    {{ errorMessage }} </span
+  ><br />
+
+  <button
+    type="submit"
+    [disabled]="registerForm.invalid"
+    [ngStyle]="
+      registerForm.invalid
+        ? { background: 'grey' }
+        : { background: 'rgb(94, 27, 218)' }
+    "
+  >
+    {{ registerForm.valid ? "REGISTER ME NOW !" : "YOU CANT REGISTER YET" }}
+  </button>
+  <a class="log-link" [routerLink]="['..', 'login']"
+    >Already registered? Log in!</a
+  >
+</form>

@@ -1,0 +1,171 @@
+<div class="main">
+  <div class="image">
+    <img src="{{ showUser.image }}" alt="" />
+  </div>
+
+  <div class="info">
+    <h1 *ngIf="!isEditing">{{ showUser.username }}</h1>
+    <div *ngIf="isEditing" class="edit-div">
+      <label>Username : </label><br />
+      <input type="text" [(ngModel)]="currentUser.username" />
+    </div>
+
+    <h2 *ngIf="!isEditing">{{ showUser.email }}</h2>
+    <div *ngIf="isEditing" class="edit-div">
+      <label>Email : </label><br />
+      <input type="text" [(ngModel)]="currentUser.email" />
+    </div>
+
+    <h2 *ngIf="!isEditing">
+      <em>{{ showUser.description }}</em>
+    </h2>
+    <div *ngIf="isEditing" class="edit-div">
+      <label>Description : </label><br />
+      <textarea cols="30" rows="10" [(ngModel)]="currentUser.description">{{
+        currentUser.description
+      }}</textarea>
+    </div>
+
+    <h3>Money in the bank: {{ showUser.money }} LUX</h3>
+
+    <button
+      *ngIf="!isEditing && showUser._id === currentUser._id"
+      class="edit-btn"
+      (click)="isEditing = !isEditing"
+    >
+      EDIT USER
+    </button>
+    <button
+      *ngIf="isEditing && showUser._id === currentUser._id"
+      class="edit-btn"
+      (click)="editUser()"
+    >
+      DONE EDITING
+    </button>
+  </div>
+
+  <div class="money" *ngIf="showUser._id === currentUser._id">
+    <button
+      class="add"
+      (click)="isAddingMoney = !isAddingMoney"
+      [ngStyle]="
+        isAddingMoney
+          ? { background: 'lightcoral' }
+          : { background: 'greenyellow' }
+      "
+    >
+      {{ isAddingMoney ? "Cancel" : "ADD MONEY" }}
+    </button>
+
+    <div class="adding" *ngIf="isAddingMoney">
+      <form [formGroup]="moneyForm" (submit)="editUser()">
+        <label>Card number (16 digits): </label><br />
+        <input type="text" formControlName="cardNumber" /><br />
+        <div
+          *ngIf="
+            moneyForm.controls['cardNumber'].invalid &&
+            moneyForm.controls['cardNumber'].touched
+          "
+        >
+          <span
+            class="error"
+            *ngIf="moneyForm.controls['cardNumber'].errors?.['required']"
+          >
+            Card number is required!</span
+          >
+          <span
+            class="error"
+            *ngIf="moneyForm.controls['cardNumber'].errors?.['minlength'] || moneyForm.controls['cardNumber'].errors?.['maxlength']"
+          >
+            Card number must be exactly 16 digits!</span
+          >
+        </div>
+        <br />
+
+        <label>Security code (3 digits): </label><br />
+        <input type="text" formControlName="securityCode" />
+        <div
+          *ngIf="
+            moneyForm.controls['securityCode'].invalid &&
+            moneyForm.controls['securityCode'].touched
+          "
+        >
+          <span
+            class="error"
+            *ngIf="moneyForm.controls['securityCode'].errors?.['required']"
+          >
+            Security code is required!</span
+          >
+          <span
+            class="error"
+            *ngIf="moneyForm.controls['securityCode'].errors?.['minlength'] || moneyForm.controls['securityCode'].errors?.['maxlength']"
+          >
+            Security code must be exactly 3 digits!</span
+          >
+        </div>
+        <br />
+
+        <label>Amount of money: </label><br />
+        <input
+          type="number"
+          [(ngModel)]="amountOfMoney"
+          formControlName="amount"
+        />
+        <div
+          *ngIf="
+            moneyForm.controls['amount'].invalid &&
+            moneyForm.controls['amount'].touched
+          "
+        >
+          <span
+            class="error"
+            *ngIf="moneyForm.controls['amount'].errors?.['required']"
+          >
+            Amount of money is required!</span
+          >
+        </div>
+        <br />
+
+        <button [disabled]="amountOfMoney <= 0 || moneyForm.invalid">
+          ADD
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<h1 class="my-nfts--title">MY NFTS</h1>
+<div class="my-nfts">
+  <div
+    class="my-nfts--item"
+    *ngFor="let nft of nftsList | userNfts: showUser._id!"
+  >
+    <a><img src="{{ nft.image }}" /></a>
+    <p>Name : {{ nft.name }}</p>
+    <p>Price : {{ nft.price }}</p>
+
+    <button
+      *ngIf="showUser._id === currentUser._id"
+      class="nft-btn"
+      [ngStyle]="nft.isOnSale ? { background: 'red' } : { background: 'green' }"
+      (click)="isNftOnSale(nft._id!)"
+    >
+      {{ !nft.isOnSale ? "SELL NFT" : "STOP SELLING" }}
+    </button>
+  </div>
+</div>
+
+<h1 class="users-title">ALL USERS</h1>
+<div class="users-container">
+  <div
+    class="users-container--item"
+    *ngFor="let user of usersList | adminFilter"
+  >
+    <a><img src="{{ user.image }}" /></a>
+    <h3>{{ user.username }}</h3>
+    <h4>{{ user.email }}</h4>
+    <a class="item--link" (click)="switchUser(user._id!)">{{
+      user._id === currentUser._id ? "Back to my profile" : "See profile"
+    }}</a>
+  </div>
+</div>

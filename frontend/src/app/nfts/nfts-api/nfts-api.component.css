@@ -1,0 +1,43 @@
+.btn-div {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.btn-div button {
+  background: black;
+  color: aqua;
+  padding: 0.5em 5em;
+  border: 5px double aqua;
+  cursor: pointer;
+}
+
+.btn-div button:hover {
+  background: aqua;
+  color: black;
+}
+
+.crypto-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0.5em;
+}
+
+.crypto-container .title {
+  font-weight: bold;
+  font-size: 1.75em;
+  color: aqua;
+  padding: 0.5em;
+}
+
+.crypto-container .subtitle {
+  font-size: 1.3em;
+  padding: 0.5em;
+}
+
+.crypto-container .price {
+  color: aqua;
+  font-size: 1.35em;
+}

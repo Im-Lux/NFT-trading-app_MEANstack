@@ -1,0 +1,8 @@
+div {
+  background: blue;
+  height: 125px;
+  padding-top: 2.25em;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.35em;
+}

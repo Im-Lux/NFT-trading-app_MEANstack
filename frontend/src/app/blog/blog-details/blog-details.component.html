@@ -1,0 +1,89 @@
+<div class="main">
+  <h1 class="main-title">{{ blogToShow.topic }}</h1>
+  <h2 class="main-subtitle">
+    by
+    <em>{{ blogToShow.userName }} at &quot;{{ blogToShow.timestamp }}&quot;</em>
+  </h2>
+</div>
+
+<div class="comments">
+  <div
+    class="comments-item"
+    *ngFor="let comment of blogToShow.comments; let i = index"
+  >
+    <p>
+      by <em>{{ comment.userName }} at &quot;{{ comment.timestamp }}&quot;</em>
+    </p>
+
+    <h2 *ngIf="editAtIndex !== i">{{ comment.comment }}</h2>
+    <div *ngIf="editAtIndex === i">
+      <label>Comment : </label><br />
+      <textarea
+        cols="50"
+        rows="10"
+        [(ngModel)]="updateComment.comment"
+      ></textarea
+      ><br />
+    </div>
+
+    <div class="buttons" *ngIf="comment.userId === currentUser._id">
+      <button
+        class="buttons-edit"
+        *ngIf="editAtIndex !== i"
+        (click)="startEditingComment(comment._id!, i)"
+      >
+        EDIT
+      </button>
+      <button
+        class="buttons-edit"
+        *ngIf="editAtIndex === i"
+        (click)="doneEditingComment()"
+      >
+        DONE EDITING
+      </button>
+      <button class="buttons-del" (click)="deleteComment(comment._id!)">
+        DELETE
+      </button>
+    </div>
+  </div>
+</div>
+
+<button
+  class="com-btn"
+  (click)="isAddCommentFormVisible = !isAddCommentFormVisible"
+>
+  {{ !isAddCommentFormVisible ? "COMMENT" : "CANCEL" }}</button
+><br />
+<div class="new-com" *ngIf="isAddCommentFormVisible">
+  <form [formGroup]="commentForm" (submit)="addComment()">
+    <label>By : </label><br />
+    <input type="text" disabled [value]="currentUser.username" /><br />
+
+    <label>Comment : </label><br />
+    <textarea cols="70" rows="20" formControlName="comment"></textarea><br />
+    <div
+      class="error-div"
+      *ngIf="
+        commentForm.controls['comment'].invalid &&
+        commentForm.controls['comment'].touched
+      "
+    >
+      <span
+        class="error"
+        *ngIf="commentForm.controls['comment'].errors?.['required']"
+      >
+        Blog comment is required!</span
+      >
+    </div>
+
+    <button
+      class="com-btn send-btn"
+      [disabled]="commentForm.invalid"
+      [ngStyle]="commentForm.invalid ? { opacity: '0.2' } : { opacity: '1' }"
+    >
+      SEND
+    </button>
+  </form>
+</div>
+
+<a [routerLink]="['..']" class="back-btn">Go back to all Blogs</a>

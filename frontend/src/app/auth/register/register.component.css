@@ -1,0 +1,36 @@
+.title {
+  font-size: 3em;
+  margin-left: 2em;
+  margin-top: 1em;
+}
+
+form {
+  margin-left: 10em;
+  padding: 3em;
+}
+
+label,
+input,
+button {
+  margin: 1em;
+  font-size: 1.5em;
+}
+
+button {
+  border: 10px double yellow;
+  color: yellow;
+  padding: 0.3em 1em;
+  cursor: pointer;
+}
+
+.error {
+  margin-left: 1em;
+  color: red;
+  font-size: 1.5em;
+  font-style: italic;
+  text-shadow: 2px 2px 10px white;
+}
+
+.log-link {
+  color: white;
+}

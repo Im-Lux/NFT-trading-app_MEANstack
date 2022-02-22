@@ -1,0 +1,35 @@
+.details {
+  display: flex;
+  flex-direction: row;
+  margin: 2em 0;
+}
+
+.details-image {
+  height: 800px;
+  width: 100%;
+}
+.details-image img {
+  object-fit: cover;
+  height: 100%;
+}
+
+.details-info {
+  width: 100%;
+  padding: 5em;
+  font-size: 2em;
+}
+.details-info h1,
+h2 {
+  margin: 1em 0;
+}
+.details-info h1 {
+  color: aqua;
+}
+.details-info a {
+  color: blue;
+  cursor: pointer;
+}
+.details-info a:hover {
+  color: red;
+  text-shadow: 5px 5px 5px white;
+}

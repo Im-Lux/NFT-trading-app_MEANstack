@@ -1,0 +1,49 @@
+<h1>ALL USERS :</h1>
+<div class="main users">
+  <div class="main-item users-item" *ngFor="let user of usersList">
+    <img src="{{ user.image }}" />
+    <h2>{{ user.username }}</h2>
+    <h3>{{ user.email }}</h3>
+    <h3>Money : {{ user.money }} LUX</h3>
+    <button (click)="deleteUser(user._id!)">DELETE</button>
+  </div>
+</div>
+
+<h1>ALL NFTS :</h1>
+<div class="main">
+  <div class="main-item" *ngFor="let nft of nftsList">
+    <img src="{{ nft.image }}" />
+    <h2>{{ nft.name }}</h2>
+    <p>
+      by <em>{{ nft.userName }}</em>
+    </p>
+    <h3>Price : {{ nft.price }}</h3>
+    <button (click)="deleteNft(nft._id!)">DELETE</button>
+  </div>
+</div>
+
+<h1>ALL MEMES :</h1>
+<div class="main">
+  <div class="main-item" *ngFor="let meme of memesList">
+    <img src="{{ meme.image }}" />
+    <h2>{{ meme.caption }}</h2>
+    <h3>
+      by <em>{{ meme.userName }}</em>
+    </h3>
+    <p>Likes : {{ meme.likes.length }}</p>
+    <p>Dislikes : {{ meme.dislikes.length }}</p>
+    <button (click)="deleteMeme(meme._id!)">DELETE</button>
+  </div>
+</div>
+
+<h1>ALL BLOGS :</h1>
+<div class="main">
+  <div class="main-item" *ngFor="let blog of blogsList">
+    <h2>{{ blog.topic }}</h2>
+    <h3>
+      by <em>{{ blog.userName }}</em> at &quot;{{ blog.timestamp }}&quot;
+    </h3>
+    <p>Number of comments: {{ blog.comments.length }}</p>
+    <button (click)="deleteBlog(blog._id!)">DELETE</button>
+  </div>
+</div>

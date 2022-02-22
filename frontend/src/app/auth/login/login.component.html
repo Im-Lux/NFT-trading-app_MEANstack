@@ -1,0 +1,36 @@
+<h2 class="title">heyyy, willkommen back</h2>
+
+<form [formGroup]="loginForm" (submit)="loginUser()">
+  <label>Username : </label><br />
+  <input
+    type="text"
+    placeholder="Johnny Bravo"
+    formControlName="username"
+  /><br />
+
+  <label>Password : </label><br />
+  <input
+    type="password"
+    placeholder="••••••••••"
+    formControlName="password"
+  /><br />
+
+  <span class="error" *ngIf="errorMessage.trim().length > 0">
+    {{ errorMessage }} </span
+  ><br />
+
+  <button
+    type="submit"
+    [disabled]="loginForm.invalid"
+    [ngStyle]="
+      loginForm.invalid
+        ? { background: 'grey' }
+        : { background: 'rgb(94, 27, 218)' }
+    "
+  >
+    {{ loginForm.valid ? "WHAT R U WAITING 4 ?!" : "NAH, NOT YET" }}
+  </button>
+  <a class="log-link" [routerLink]="['..', 'register']"
+    >Don't have an account? Register now!</a
+  >
+</form>

@@ -1,0 +1,93 @@
+<h1 class="title">DOPE MEMES</h1>
+
+<div class="add-new">
+  <button
+    (click)="isAdding()"
+    [ngStyle]="
+      !isAddingNewMeme ? { background: 'blue' } : { background: 'red' }
+    "
+  >
+    {{ !isAddingNewMeme ? "ADD NEW MEME" : "CANCEL" }}
+  </button>
+</div>
+
+<div class="form" *ngIf="isAddingNewMeme">
+  <form [formGroup]="memesForm" (submit)="addMeme()">
+    <label>Image : </label><br />
+    <input type="text" formControlName="image" /><br />
+    <div
+      class="error-div"
+      *ngIf="
+        memesForm.controls['image'].invalid &&
+        memesForm.controls['image'].touched
+      "
+    >
+      <span
+        class="error"
+        *ngIf="memesForm.controls['image'].errors?.['required']"
+      >
+        Meme image is required!</span
+      >
+    </div>
+
+    <label>Caption : </label><br />
+    <input type="text" formControlName="caption" /><br />
+    <div
+      class="error-div"
+      *ngIf="
+        memesForm.controls['caption'].invalid &&
+        memesForm.controls['caption'].touched
+      "
+    >
+      <span
+        class="error"
+        *ngIf="memesForm.controls['caption'].errors?.['required']"
+      >
+        Meme caption is required!</span
+      >
+    </div>
+
+    <button
+      [disabled]="memesForm.invalid"
+      [ngStyle]="
+        memesForm.invalid ? { background: 'grey', color: 'darkgrey' } : {}
+      "
+    >
+      ADD
+    </button>
+  </form>
+</div>
+
+<div class="main">
+  <div class="main-item" *ngFor="let meme of memesList">
+    <button *ngIf="meme.userId === currentUser._id" (click)="deleteMeme(meme)">
+      delete
+    </button>
+    <h1>{{ meme.caption }}</h1>
+    <img src="{{ meme.image }}" />
+    <p>
+      by <em>{{ meme.userName }}</em>
+    </p>
+    <div class="likes">
+      <button
+        class="like"
+        [disabled]="checkIfAlreadyReacted(meme)"
+        [ngStyle]="checkIfAlreadyReacted(meme) ? { opacity: '0.5' } : {}"
+        (click)="editMeme(meme, 'like')"
+      >
+        <i class="fa fa-heart"></i> LIKE
+      </button>
+      <button
+        class="dislike"
+        [disabled]="checkIfAlreadyReacted(meme)"
+        (click)="editMeme(meme, 'dislike')"
+      >
+        <i class="fa fa-thumbs-down"></i> DISLIKE
+      </button>
+      <h3 *ngIf="checkIfAlreadyReacted(meme)">{{ reactedText(meme) }}</h3>
+      <p class="likes-info">
+        Likes: {{ meme.likes.length }} || Dislikes: {{ meme.dislikes.length }}
+      </p>
+    </div>
+  </div>
+</div>

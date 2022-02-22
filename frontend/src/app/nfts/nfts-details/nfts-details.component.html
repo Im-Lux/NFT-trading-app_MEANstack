@@ -1,0 +1,14 @@
+<div class="details">
+  <div class="details-image">
+    <img src="{{ nftToShow.image }}" />
+  </div>
+
+  <div class="details-info">
+    <h1>{{ nftToShow.name }}</h1>
+    <h2>
+      BY : <em>{{ nftToShow.userName }}</em>
+    </h2>
+    <h1>{{ nftToShow.price }}</h1>
+    <a (click)="navigateBack()">Go back to all NFTs</a>
+  </div>
+</div>

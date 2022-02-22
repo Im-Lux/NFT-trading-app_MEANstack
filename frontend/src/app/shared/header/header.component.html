@@ -1,0 +1,17 @@
+<nav>
+  <ul>
+    <li><a [routerLink]="['']">NFTS</a></li>
+    <li><a [routerLink]="['memes']">MEMES</a></li>
+    <li><a [routerLink]="['blog']">BLOG</a></li>
+    <li></li>
+    <li *ngIf="isLoggedIn"><a [routerLink]="['profile']">PROFILE</a></li>
+    <li><a *ngIf="!isLoggedIn" [routerLink]="['auth', 'login']">LOG IN</a></li>
+    <li *ngIf="!isLoggedIn">
+      <a [routerLink]="['auth', 'register']">SIGN UP</a>
+    </li>
+    <li *ngIf="isLoggedIn"><a (click)="letsLogout()">LOG OUT</a></li>
+  </ul>
+</nav>
+<p class="user-cred" *ngIf="authService.isUserLoggedIn | async">
+  Yoooo! Welcome back {{ currentUser.username }}
+</p>

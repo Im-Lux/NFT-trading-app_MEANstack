@@ -1,0 +1,137 @@
+<div class="header">
+  <h1 class="title">ON SALE</h1>
+  <button
+    *ngIf="isLoggedIn"
+    (click)="isAddNFTFormVisible = !isAddNFTFormVisible"
+  >
+    {{ !isAddNFTFormVisible ? "Add new NFT" : "Cancel" }}
+  </button>
+</div>
+
+<div class="forma" *ngIf="isAddNFTFormVisible">
+  <form>
+    <label>User : </label>
+    <input
+      class="txt"
+      type="text"
+      [(ngModel)]="currentUser.username"
+      disabled
+      name="userName"
+    /><br />
+
+    <label>NFT url : </label>
+    <input type="text" [(ngModel)]="newNft.image" name="image" /><br />
+
+    <label>Name : </label>
+    <input
+      class="txt"
+      type="text"
+      [(ngModel)]="newNft.name"
+      name="name"
+    /><br />
+
+    <label>Price : </label>
+    <input
+      class="txt"
+      type="text"
+      [(ngModel)]="newNft.price"
+      name="price"
+    /><br />
+
+    <div class="error">{{ addNftErrorMessage }}</div>
+
+    <input class="sendNFT" type="submit" value="SELL NFT" (click)="addNft()" />
+  </form>
+</div>
+
+<div class="filter" *ngIf="isLoggedIn">
+  <div class="filter-sub">
+    <button (click)="filterString = 'name'">NAME</button>
+    <button (click)="filterString = 'price'; filterReverse = false">
+      PRICE LOW
+    </button>
+    <button (click)="filterString = 'price'; filterReverse = true">
+      PRICE HIGH
+    </button>
+    <button (click)="filterString = '_id'">CLEAR</button>
+  </div>
+</div>
+
+<div class="main">
+  <div class="main-nfts">
+    <div
+      class="main-nfts--item"
+      *ngFor="
+        let nft of nftsList | checkSale | filter: filterString:filterReverse;
+        let i = index
+      "
+    >
+      <a [routerLink]="['', nft._id]"><img src="{{ nft.image }}" /></a>
+
+      <p *ngIf="editAtIndex != i">Name: {{ nft.name }}</p>
+      <div *ngIf="editAtIndex == i">
+        <label>Name : </label>
+        <input type="text" [(ngModel)]="updateNft.name" /><br />
+      </div>
+
+      <p>
+        Made by: <em> {{ nft.userName }}</em>
+      </p>
+
+      <p *ngIf="editAtIndex != i">Price: {{ nft.price }}</p>
+      <div *ngIf="editAtIndex == i">
+        <label>Price : </label>
+        <input type="text" [(ngModel)]="updateNft.price" /><br />
+      </div>
+
+      <div
+        class="nft-buttons"
+        *ngIf="isLoggedIn && currentUser._id === nft.userId"
+      >
+        <button
+          class="edit-btn"
+          *ngIf="editAtIndex != i"
+          (click)="startEditing(nft._id!, i)"
+        >
+          EDIT
+        </button>
+        <button
+          class="edit-btn"
+          *ngIf="editAtIndex == i"
+          (click)="doneEditing()"
+        >
+          DONE EDITING
+        </button>
+        <button class="del-btn" (click)="deleteNft(i)">DELETE</button>
+      </div>
+
+      <button
+        class="buy-btn"
+        *ngIf="isLoggedIn && currentUser._id !== nft.userId"
+        (click)="startBuying(nft._id!)"
+      >
+        BUY
+      </button>
+
+      <div class="buying-div" *ngIf="isBuying && nft._id === nftIdToBuy">
+        <span [innerHtml]="buyingMessage"></span>
+        <div>
+          <button
+            class="btn-yes"
+            (click)="completeBuying(nft._id)"
+            [disabled]="!isReadyToBuy"
+          >
+            YES
+          </button>
+          <button class="btn-no" (click)="stopBuying()">
+            {{ isReadyToBuy ? "NO" : "CANCEL" }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-api">
+    <app-nfts-api></app-nfts-api>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="btn-div">
+  <button (click)="initialize()">REFRESH</button>
+</div>
+
+<div *ngFor="let crypto of cryptos">
+  <div class="crypto-container">
+    <h3 class="title">{{ crypto.name }}</h3>
+    <h4 class="subtitle">{{ crypto.fullname }}</h4>
+    <p class="price">{{ crypto.price }}</p>
+  </div>
+  <hr />
+</div>

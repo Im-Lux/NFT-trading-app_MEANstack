@@ -1,0 +1,175 @@
+.header {
+  display: flex;
+  flex-direction: row;
+}
+
+.header button {
+  align-self: flex-end;
+  border: 10px double white;
+  background: black;
+  color: white;
+  padding: 0.25em 3em;
+  cursor: pointer;
+  font-size: 1.25em;
+}
+
+.title {
+  font-size: 7em;
+  font-style: italic;
+  color: azure;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+}
+
+.main-nfts {
+  flex: 4;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 0.5em;
+}
+
+.main-nfts--item {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  margin: 3em 0;
+  padding-bottom: 1em;
+  font-size: 1.5em;
+  background: rgb(24, 20, 20);
+  border-radius: 5px;
+}
+
+.main-nfts--item .buy-btn {
+  width: 40%;
+  height: 2em;
+  font-size: 0.75em;
+  font-weight: bold;
+  background: blue;
+  color: white;
+  cursor: pointer;
+}
+
+.nft-buttons {
+  width: 100%;
+  text-align: center;
+}
+.nft-buttons button {
+  width: 40%;
+  margin: 1em;
+  height: 1.75em;
+  font-size: 0.75em;
+  font-weight: bold;
+  cursor: pointer;
+}
+.edit-btn {
+  background: rgb(236, 180, 76);
+}
+.del-btn {
+  background: red;
+}
+
+.main-nfts--item a img {
+  width: 750px;
+  height: 400px;
+  object-fit: cover;
+}
+
+@media screen and (min-width: 2500px) {
+  .main-nfts--item a img {
+    height: 575px;
+  }
+}
+
+.main-api {
+  flex: 1;
+  margin-top: 3em;
+}
+
+.forma {
+  display: flex;
+  border: 1px solid red;
+  margin: 2em;
+}
+
+.forma label {
+  font-size: 30px;
+  padding: 2em;
+}
+
+.forma input {
+  margin: 2em;
+  height: 2em;
+}
+
+.forma .txt {
+  width: 20em;
+  height: 2.25em;
+}
+
+.sendNFT {
+  width: 100%;
+  background: black;
+  color: white;
+  border: 5px double blue;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.filter {
+  margin-top: 2em;
+  display: flex;
+}
+.filter-sub {
+  width: 90%;
+}
+.filter-sub button {
+  margin-left: 1em;
+  width: 8.5em;
+  height: 1.75em;
+  background: yellowgreen;
+  color: black;
+  font-size: 1.25em;
+  border: 5px double blue;
+  cursor: pointer;
+}
+
+.error {
+  width: 100%;
+  text-align: center;
+  color: red;
+  font-size: 1.5em;
+  font-style: italic;
+  text-shadow: 2px 2px 10px white;
+}
+
+.buying-div {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.buying-div div {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  width: 100%;
+}
+.btn-yes,
+.btn-no {
+  width: 50%;
+  border: 2px solid white;
+  font-weight: bold;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+.btn-yes {
+  background: green;
+}
+.btn-no {
+  background: red;
+}

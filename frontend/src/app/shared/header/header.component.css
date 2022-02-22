@@ -1,0 +1,33 @@
+nav {
+  background: blue;
+  padding: 1em;
+  font-size: 2em;
+}
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+li {
+  list-style-type: none;
+}
+
+li a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+li a:hover {
+  text-decoration: line-through;
+  color: yellow;
+}
+
+.user-cred {
+  background: yellow;
+  color: blue;
+  padding: 1.25em 5em;
+  font-size: 1.5em;
+}

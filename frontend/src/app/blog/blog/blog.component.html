@@ -1,0 +1,55 @@
+<div class="header">
+  <h1 class="main-title">LIST OF ALL BLOGS ({{ blogsList.length }}) :</h1>
+  <button (click)="isAddBlogFormVisible = !isAddBlogFormVisible">
+    {{ !isAddBlogFormVisible ? "NEW BLOG POST" : "CANCEL" }}
+  </button>
+</div>
+
+<div class="new" *ngIf="isAddBlogFormVisible">
+  <form [formGroup]="blogForm" (submit)="addBlog()">
+    <label>By : </label><br />
+    <input type="text" disabled value="{{ currentUser.username }}" /><br />
+
+    <label>Topic : </label><br />
+    <input type="text" formControlName="topic" /><br />
+    <div
+      class="error-div"
+      *ngIf="
+        blogForm.controls['topic'].invalid && blogForm.controls['topic'].touched
+      "
+    >
+      <span
+        class="error"
+        *ngIf="blogForm.controls['topic'].errors?.['required']"
+      >
+        Blog topic is required!</span
+      >
+    </div>
+
+    <button
+      [disabled]="blogForm.invalid"
+      [ngStyle]="blogForm.invalid ? { opacity: '0.5' } : { opacity: '1' }"
+    >
+      ADD
+    </button>
+  </form>
+</div>
+
+<div class="main">
+  <div class="item" *ngFor="let blog of blogsList">
+    <h1>{{ blog.topic }}</h1>
+    <h2>
+      by <em>{{ blog.userName }}</em> at &quot;{{ blog.timestamp }}&quot;
+    </h2>
+    <div>
+      <button [routerLink]="[blog._id]" class="item-see">SEE MORE</button>
+      <button
+        class="item-del"
+        *ngIf="blog.userId === currentUser._id"
+        (click)="deleteBlog(blog)"
+      >
+        DELETE
+      </button>
+    </div>
+  </div>
+</div>

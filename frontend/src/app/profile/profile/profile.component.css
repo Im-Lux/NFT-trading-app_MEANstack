@@ -1,0 +1,160 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  padding: 3em;
+}
+
+.main .image {
+  flex: 2;
+}
+
+.main .info {
+  flex: 2;
+}
+
+.main .money {
+  flex: 1;
+}
+
+.main .image img {
+  border-radius: 13em;
+  width: 500px;
+  height: 500px;
+  object-fit: cover;
+}
+
+.main .info {
+  padding: 3em 0;
+  padding-right: 10em;
+}
+.main .info h1 {
+  font-size: 5em;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5em;
+}
+.main .info h2 {
+  margin-bottom: 0.5em;
+  font-size: 1.75em;
+}
+.main .info h3 {
+  font-size: 1.5em;
+  color: aqua;
+}
+.main .info .edit-btn {
+  margin-top: 2em;
+  font-size: 1.75em;
+  padding: 0.15em 1em;
+  width: 50%;
+  background: rgb(43, 42, 42);
+  color: aqua;
+  border: 3px solid aqua;
+  cursor: pointer;
+}
+.edit-div {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+.money .add {
+  border: 5px double blue;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 0.25em 2em;
+  cursor: pointer;
+}
+
+.adding {
+  padding: 1.25em;
+  font-size: 1.5em;
+}
+.adding input {
+  margin: 1.25em 0;
+}
+.adding button {
+  background-color: green;
+  font-size: 0.75em;
+  padding: 0.15em 2em;
+  cursor: pointer;
+}
+
+.my-nfts--title {
+  font-size: 8em;
+  margin: 0.25em 2em;
+}
+.my-nfts {
+  width: 75%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.my-nfts--item {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  margin-bottom: 7em;
+  padding-bottom: 1em;
+  background: rgb(24, 20, 20);
+}
+.my-nfts--item a img {
+  width: 700px;
+  height: 400px;
+  object-fit: cover;
+}
+
+.users-title {
+  font-size: 4em;
+  margin-left: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.users-container {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  margin-bottom: 5em;
+}
+
+.users-container--item {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 2em;
+}
+
+.users-container--item img {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+  border-radius: 25px;
+  border: 3px solid blue;
+}
+
+.item--link {
+  color: aqua;
+  text-decoration: none;
+  border-bottom: 5px solid aqua;
+  cursor: pointer;
+}
+.item--link:hover {
+  color: rgba(52, 52, 235, 0.733);
+  border-bottom: 5px solid blue;
+}
+
+.nft-btn {
+  font-size: 1.15em;
+  padding: 0.25em 1em;
+  color: white;
+  font-weight: bold;
+  border: 5px solid white;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  font-size: 1em;
+  font-style: italic;
+}
